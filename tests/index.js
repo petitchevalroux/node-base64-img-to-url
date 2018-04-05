@@ -3,9 +3,15 @@ const path = require("path"),
     Base64Img = require(path.join(__dirname, "..")),
     Promise = require("bluebird"),
     assert = require("assert"),
-    cheerio = require("cheerio");
+    cheerio = require("cheerio"),
+    sinon = require("sinon"),
+    fileType = require('file-type');
 
 describe("Base64Img", () => {
+    const sandbox = sinon.sandbox.create();
+    afterEach(() => {
+        sandbox.restore();
+    });
     const uploader = {
             upload: () => {
                 this.counter = (this.counter || 0) + 1;
@@ -59,6 +65,16 @@ describe("Base64Img", () => {
             .then(html => {
                 assert(html.indexOf("<body>") > -1);
                 return html;
+            });
+    });
+
+    it("call uploader.upload with the right arguments",()=>{
+        sandbox.spy(uploader,"upload");
+        base64Img
+            .replaceWithUrl("<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">")
+            .then(()=>{
+                assert.equal(fileType(uploader.upload.getCall(0).args[0]).mime,"image/png");
+                assert.equal(uploader.upload.getCall(0).args[1],"image/png");
             });
     });
 
