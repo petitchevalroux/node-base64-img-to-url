@@ -2,3 +2,44 @@
 
 Convert base64 encoded image to url in html
 
+## Usage
+### Example code
+```
+const Base64Img = require("base64-img-to-url");
+    base64Img = new Base64Img({
+        upload: () => {
+            this.counter = (this.counter || 0) + 1;
+            return Promise.resolve("https://example.com/img/" +
+                this.counter);
+        }
+    });
+    base64Img.replaceWithUrl("<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">")
+    .then(html=>{
+        console.log(html);
+    });
+```
+
+### Output
+
+```
+<img src="https://example.com/img/1">
+```
+
+## Uploader
+### Uploader requirements
+Uploader instance must have an upload member function.
+This function must return a promised string containing the image url.
+###  Uploader skeleton
+```javascript
+const uploader = {
+    /**
+     * Handle upload
+     * @param {buffer} buffer image buffer
+     * @param {string} mimeType image mime type
+     * @returns {Promise<string>} image url
+     */
+    upload: (buffer,mimeType) => {
+
+    }
+};
+```
