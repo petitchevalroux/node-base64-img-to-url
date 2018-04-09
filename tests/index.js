@@ -5,7 +5,7 @@ const path = require("path"),
     assert = require("assert"),
     cheerio = require("cheerio"),
     sinon = require("sinon"),
-    fileType = require('file-type');
+    fileType = require("file-type");
 
 describe("Base64Img", () => {
     const sandbox = sinon.sandbox.create();
@@ -68,13 +68,20 @@ describe("Base64Img", () => {
             });
     });
 
-    it("call uploader.upload with the right arguments",()=>{
-        sandbox.spy(uploader,"upload");
-        base64Img
-            .replaceWithUrl("<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">")
-            .then(()=>{
-                assert.equal(fileType(uploader.upload.getCall(0).args[0]).mime,"image/png");
-                assert.equal(uploader.upload.getCall(0).args[1],"image/png");
+    it("call uploader.upload with the right arguments", () => {
+        sandbox.spy(uploader, "upload");
+        return base64Img
+            .replaceWithUrl(
+                "<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">"
+            )
+            .then((html) => {
+                assert.equal(fileType(uploader.upload.getCall(
+                    0)
+                    .args[0])
+                    .mime, "image/png");
+                assert.equal(uploader.upload.getCall(0)
+                    .args[1], "image/png");
+                return html;
             });
     });
 
