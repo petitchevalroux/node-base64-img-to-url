@@ -1,11 +1,15 @@
 # base64-img-to-url
 
 Convert base64 encoded image to url in html
+## Install
+```
+npm install @petitchevalroux/base64-img-to-url
+```
 
 ## Usage
 ### Example code
 ```
-const Base64Img = require("base64-img-to-url");
+const Base64Img = require("@petitchevalroux/base64-img-to-url");
     base64Img = new Base64Img({
         upload: () => {
             this.counter = (this.counter || 0) + 1;
