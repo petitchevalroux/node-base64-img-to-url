@@ -1,6 +1,8 @@
 # base64-img-to-url
 
 Convert base64 encoded image to url in html
+
+In order to convert url to base64 images in html see [url-to-base64-img](https://github.com/petitchevalroux/node-url-to-base64-img)
 ## Install
 ```
 npm install @petitchevalroux/base64-img-to-url
