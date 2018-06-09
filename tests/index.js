@@ -23,7 +23,7 @@ describe("Base64Img", () => {
 
     function getParsedContent(html) {
         return base64Img
-            .replaceWithUrl(html)
+            .replace(html)
             .then(html => {
                 return cheerio.load(html);
             });
@@ -50,7 +50,7 @@ describe("Base64Img", () => {
 
     it("doesnt add body if body is not in original fragment", () => {
         return base64Img
-            .replaceWithUrl("<h1>Title 1</h1>")
+            .replace("<h1>Title 1</h1>")
             .then(html => {
                 assert.equal(html.indexOf("<body>"), -1);
                 return html;
@@ -60,7 +60,7 @@ describe("Base64Img", () => {
 
     it("leave body if body is in original fragment", () => {
         return base64Img
-            .replaceWithUrl(
+            .replace(
                 "<html><body><h1>Title 1</h1></body></html>")
             .then(html => {
                 assert(html.indexOf("<body>") > -1);
@@ -71,7 +71,7 @@ describe("Base64Img", () => {
     it("call uploader.upload with the right arguments", () => {
         sandbox.spy(uploader, "upload");
         return base64Img
-            .replaceWithUrl(
+            .replace(
                 "<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">"
             )
             .then((html) => {

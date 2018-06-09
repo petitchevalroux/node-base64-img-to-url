@@ -19,7 +19,7 @@ const Base64Img = require("@petitchevalroux/base64-img-to-url");
                 this.counter);
         }
     });
-    base64Img.replaceWithUrl("<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">")
+    base64Img.replace("<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">")
     .then(html=>{
         console.log(html);
     });

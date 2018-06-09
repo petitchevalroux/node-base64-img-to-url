@@ -5,7 +5,7 @@ class Base64Img {
     constructor(uploader) {
         this.uploader = uploader;
     }
-    replaceWithUrl(html) {
+    replace(html) {
         const self = this;
         try {
             const $ = cheerio.load(html),
