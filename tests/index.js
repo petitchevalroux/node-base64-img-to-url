@@ -103,11 +103,24 @@ describe("Base64Img", () => {
         return new Base64Img({
             uploader: uploader,
             htmlParserOptions: {
-                decodeEntities: false
+                decodeEntities: true
             }
         })
             .replace(
                 "&eacute;"
+            )
+            .then(html => {
+                assert.equal(html, "&#xE9;");
+                return html;
+            });
+    });
+
+    it("do not encode non ascii char as entites", () => {
+        return new Base64Img({
+            uploader: uploader
+        })
+            .replace(
+                "é"
             )
             .then(html => {
                 assert.equal(html, "é");
