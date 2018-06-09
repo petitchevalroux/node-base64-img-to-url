@@ -1,6 +1,6 @@
 {
     "name": "@petitchevalroux/base64-img-to-url",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Convert base64 encoded image to url in html",
     "main": "src/index.js",
     "scripts": {
