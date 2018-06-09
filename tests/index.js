@@ -115,17 +115,32 @@ describe("Base64Img", () => {
             });
     });
 
-    it("do not encode non ascii char as entites", () => {
-        return new Base64Img({
-            uploader: uploader
-        })
-            .replace(
-                "é"
-            )
-            .then(html => {
-                assert.equal(html, "é");
-                return html;
-            });
-    });
+    it(
+        "do not encode non ascii char as entites with uploader as options property",
+        () => {
+            return new Base64Img({
+                uploader: uploader
+            })
+                .replace(
+                    "é"
+                )
+                .then(html => {
+                    assert.equal(html, "é");
+                    return html;
+                });
+        });
+
+    it(
+        "do not encode non ascii char as entites without uploader params",
+        () => {
+            return new Base64Img(uploader)
+                .replace(
+                    "è"
+                )
+                .then(html => {
+                    assert.equal(html, "è");
+                    return html;
+                });
+        });
 
 });

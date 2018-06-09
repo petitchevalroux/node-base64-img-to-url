@@ -7,14 +7,14 @@ class Base64Img {
             this.uploader = options.uploader;
             if (options.htmlParserOptions) {
                 this.htmlParserOptions = options.htmlParserOptions;
-            } else {
-                this.htmlParserOptions = {
-                    decodeEntities: false
-                };
             }
         } else {
             this.uploader = options;
         }
+        this.htmlParserOptions = this.htmlParserOptions ? this.htmlParserOptions :
+            {
+                decodeEntities: false
+            };
     }
     replace(html) {
         const self = this;
