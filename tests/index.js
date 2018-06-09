@@ -99,4 +99,20 @@ describe("Base64Img", () => {
             });
     });
 
+    it("support htmlParserOptions using construct options", () => {
+        return new Base64Img({
+            uploader: uploader,
+            htmlParserOptions: {
+                decodeEntities: false
+            }
+        })
+            .replace(
+                "&eacute;"
+            )
+            .then(html => {
+                assert.equal(html, "é");
+                return html;
+            });
+    });
+
 });

@@ -5,6 +5,9 @@ class Base64Img {
     constructor(options) {
         if (options.uploader) {
             this.uploader = options.uploader;
+            if (options.htmlParserOptions) {
+                this.htmlParserOptions = options.htmlParserOptions;
+            }
         } else {
             this.uploader = options;
         }
@@ -12,7 +15,7 @@ class Base64Img {
     replace(html) {
         const self = this;
         try {
-            const $ = cheerio.load(html),
+            const $ = cheerio.load(html, self.htmlParserOptions),
                 promises = [],
                 hasBody = html.indexOf("<body>") > -1;
             $("img[src^='data:']")
