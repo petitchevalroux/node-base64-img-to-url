@@ -85,4 +85,18 @@ describe("Base64Img", () => {
             });
     });
 
+    it("support uploader as construct options", () => {
+        sandbox.spy(uploader, "upload");
+        return new Base64Img({
+            uploader: uploader
+        })
+            .replace(
+                "<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\">"
+            )
+            .then(() => {
+                assert(uploader.upload.called);
+                return uploader;
+            });
+    });
+
 });

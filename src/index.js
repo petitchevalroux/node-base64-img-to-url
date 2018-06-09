@@ -2,8 +2,12 @@
 const cheerio = require("cheerio"),
     Promise = require("bluebird");
 class Base64Img {
-    constructor(uploader) {
-        this.uploader = uploader;
+    constructor(options) {
+        if (options.uploader) {
+            this.uploader = options.uploader;
+        } else {
+            this.uploader = options;
+        }
     }
     replace(html) {
         const self = this;
